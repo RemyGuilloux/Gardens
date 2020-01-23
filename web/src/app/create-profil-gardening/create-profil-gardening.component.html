@@ -1,0 +1,46 @@
+<app-header></app-header>
+<h3>Creér Profil Jardinier</h3>
+<div [hidden]="submitted" style="width: 400px;">
+    <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="name"> Name</label>
+            <input type="text" class="form-control" id="name" required [(ngModel)]="gardening.name" name="name">
+        </div>
+
+        <div class="form-group">
+            <label for="name">Last Name</label>
+            <input type="text" class="form-control" id="lastname" required [(ngModel)]="gardening.lastname" name="lastname">
+        </div>
+
+        <div class="form-group">
+            <label for="name">Mail</label>
+            <input type="text" class="form-control" id="mail" required [(ngModel)]="gardening.mail" name="mail">
+        </div>
+
+        <div class="form-group">
+            <label for="name">Phone</label>
+            <input type="text" class="form-control" id="phone" required [(ngModel)]="gardening.phone" name="phone">
+        </div>
+
+        <div class="form-group">
+            <label for="name">Gender</label>
+            <input type="text" class="form-control" id="gender" required [(ngModel)]="gardening.gender" name="gender">
+        </div>
+
+        <div class="form-group">
+                <label for="localisation">Localisation</label>
+                <input type="text" class="form-control" id="localisation" required [(ngModel)]="gardening.localisation" name="localisation">
+            </div>
+
+            <div class="form-group">
+                    <label for="name"> Type de Services</label>
+                    <input type="text" class="form-control" id="type" required [(ngModel)]="gardening.type" name="type">
+                </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+    </form>
+</div>
+<div [hidden]="!submitted">
+    <h4> You submitted successfully!</h4>
+    <!-- <button class="btn btn-success" (click) ="newProfil()">Add</button>-->
+</div>

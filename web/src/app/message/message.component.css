@@ -1,0 +1,10 @@
+.example-card{
+    text-align: center;
+    display: flex;
+    margin-right: auto;
+    
+}
+
+.example-form,.example-full-width{
+    text-align: center;
+}

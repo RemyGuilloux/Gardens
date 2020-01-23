@@ -1,0 +1,38 @@
+<app-header></app-header>
+<div class="panel panel-default">
+        <div class="panel-heading">
+            <h1>Profils</h1>
+        </div>
+        <div class="panel-body">
+            <table class="table table-striped ">
+                <thead>
+                    <tr>
+                        <th>Localisation du jardin</th>
+                        <th>Type de Services</th>
+                        <th>Votre prénom</th>
+                        <th>Votre nom</th>
+                        <th>Mail</th>
+                        <th>Téléphone</th>
+                        <th></th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let gardening of gardenings | async ">
+                        <td>{{gardening.localisation}}</td>
+                        <td>{{gardening.type}}</td>
+                        <td>{{gardening.name}}</td>
+                        <td>{{gardening.lastname}}</td>
+                        <td>{{gardening.mail}}</td>
+                        <td>{{gardening.phone}}</td>
+                        <td>{{gardening.gender}}</td>
+                        <td><button (click)="postMessage(message.id)" class="btn btn-danger">Envoyer un message à cette personne</button></td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+            <td class="nav-item" style="margin-left: 20px;"><a routerLink="/add gardening" class="btn btn-primary active" role="button" routerLinkActive="active">Créer votre Profil</a> </td>
+            <td><button (click)="getH()" class="btn btn-info" style ="margin-left: 10px">Retour Accueil</button></td>
+        </div>
+    </div>
+    

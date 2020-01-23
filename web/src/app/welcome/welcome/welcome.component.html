@@ -1,0 +1,30 @@
+<div class="container container-fluid">
+    <div class="row">
+      <app-banner></app-banner>
+    </div>  
+  </div>
+  <mat-card id="forms" class="container container-fluid">
+    <h4>Afin de pouvoir vous connecter à l'application, Veuillez créer un compte puis vous connecter à votre compte</h4>
+  </mat-card>
+  
+    <mat-card id="forms" class="container container-fluid">
+      <mat-tab-group 
+        mat-stretch-tabs dynamicHeight >
+    
+        <mat-tab class="container container-fluid" label="Créer votre compte">
+            <app-register class="spaced"></app-register>
+        </mat-tab>
+    
+        <mat-tab class="container container-fluid" label="Connexion" isActive>
+            <app-login class="mat-elevation-z4"></app-login> 
+        </mat-tab>
+    
+      </mat-tab-group>
+    </mat-card>
+  
+            
+      <div class="container container-fluid">
+                  <div class="row">
+                    <app-footer></app-footer>
+                  </div>
+  </div>
