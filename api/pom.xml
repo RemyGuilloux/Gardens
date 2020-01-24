@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>fr.formation</groupId>
-	<artifactId>projection</artifactId>
+	<artifactId>Gardens</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>chef d'oeuvre</name>
 	<description>demo project for projected dto</description>
