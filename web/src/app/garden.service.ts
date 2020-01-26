@@ -25,8 +25,8 @@ export class GardenService {
     return this.http.post(`${this.baseUrl}`, garden);
   }
 
-  updateGarden(id: number, value: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, value);
+  updateGarden(id: number, garden: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/${id}`, garden);
   }
 
   deleteGarden(id: number): Observable<any> {

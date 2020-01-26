@@ -16,12 +16,14 @@ export class GardenListComponent implements OnInit {
 gardens: Observable<Garden[]>;
 profil: Profil = new Profil();
 address: Address = new Address();
+garden: Garden = new Garden();
 submitted = false;
 id: number;
   constructor(private gardenService: GardenService, private router: Router, private profilService: ProfilService, private addressService: AddressService) {
     this.profil = new Profil();
     this.address = new Address();
-   }
+    this.garden = new Garden();
+  }
 
   ngOnInit() {
     this.reloadData();
@@ -37,19 +39,9 @@ id: number;
     console.log(data);
     this.goto();
       });
-    
-    
   }
   goto() {
     this.router.navigate(['/profil']);
-  }
-  
-  
-  gotoList(){
-    this.router.navigate(['/profils']);
-  }
-  getP() {
-    this.gotoList1();
   }
 
   gotoList1() {
@@ -63,7 +55,7 @@ id: number;
     this.router.navigate(['/homepage']);
   }
   getAd(addressId) {
-    console.log("id de l'adresse est =", this.id)
+    console.log('id de l\'adresse est =', this.id);
     this.addressService.getAddress(addressId)
       .subscribe(data => {
         this.addressService.address = data;
@@ -73,5 +65,13 @@ id: number;
   }
   gotoAddress() {
     this.router.navigate(['/address']);
+  }
+
+  updateGarden(id) {
+    
+    this.gotoGardenUpdatePage(id);
+  }
+  gotoGardenUpdatePage(id){
+    this.router.navigate(['/gardenUpdate',id]);
   }
 }

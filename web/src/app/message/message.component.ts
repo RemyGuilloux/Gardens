@@ -10,7 +10,8 @@ import { FormGroup, FormBuilder } from  '@angular/forms';
 export class MessageComponent {
   contactForm: FormGroup;
   submitted = false;
-
+name: string;
+email: string;
   
   constructor(private formBuilder: FormBuilder) {
     this.createContactForm();
@@ -24,7 +25,7 @@ export class MessageComponent {
   }
   createContactForm(){
     this.contactForm = this.formBuilder.group({
-      fullName: [''],  
+      name: [''],  
       email: [''],
       message: ['']
     });

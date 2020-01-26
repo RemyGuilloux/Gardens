@@ -19,6 +19,5 @@ export class HeaderComponent implements OnInit {
   public onToggleSidenav = () => {
     this.sidenavToggle.emit;
   }
-  logout = (): void => {Cookie.delete('access_token'); 
-  this.router.navigate(['/welcome']); };
+logout = (): void => {Cookie.delete('access_token'); this.router.navigate(['/welcome']); };
 }

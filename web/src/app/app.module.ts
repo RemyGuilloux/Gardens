@@ -44,6 +44,7 @@ import { JwPaginationComponent } from 'jw-angular-pagination';
 import { ProfilComponent } from './profil/profil.component';
 import {FileUploadModule} from 'ng2-file-upload';
 import { UploadFileComponent } from './upload-file/upload-file.component';
+import { UpdateGardenComponent } from './update-garden/update-garden.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +72,8 @@ import { UploadFileComponent } from './upload-file/upload-file.component';
     WelcomeComponent,
     JwPaginationComponent,
     ProfilComponent,
-    UploadFileComponent
+    UploadFileComponent,
+    UpdateGardenComponent
     
     
     
