@@ -1,0 +1,78 @@
+CREATE SCHEMA `Gardens`;
+USE `Gardens`;
+
+
+
+CREATE TABLE profil(
+   id INT NOT NULL AUTO_INCREMENT,
+   name VARCHAR(50) NOT NULL,
+   localisation VARCHAR(50) NOT NULL,
+   lastname VARCHAR(50) NOT NULL,
+   phone VARCHAR(50) NOT NULL,
+   mail VARCHAR(50) NOT NULL,
+   gender VARCHAR(50) NOT NULL,
+   PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE garden (
+    id INT NOT NULL AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    size DECIMAL(15 , 2 ) NOT NULL,
+    localisation VARCHAR(50) NOT NULL,
+    type_of_garden VARCHAR(50) NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY(id_profil) REFERENCES profil(id),
+   FOREIGN KEY(id_address) REFERENCES address(id)
+)  ENGINE=INNODB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE gardener(
+   id INT NOT NULL AUTO_INCREMENT,
+   type VARCHAR(1000) NOT NULL,
+   localisation VARCHAR(50) NOT NULL,
+   name VARCHAR(50) NOT NULL,
+   lastname VARCHAR(50) NOT NULL,
+   phone VARCHAR(50) NOT NULL,
+   mail VARCHAR(50) NOT NULL, 
+   gender VARCHAR(50) NOT NULL,
+   PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE role(
+   id INT NOT NULL AUTO_INCREMENT,
+   code VARCHAR(256) NOT NULL,
+   defaultRole BOOLEAN DEFAULT false,
+   PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE CustomeUSer(
+   id INT NOT NULL AUTO_INCREMENT,
+   username VARCHAR(50) NOT NULL,
+   email VARCHAR(50) NOT NULL,
+   password VARCHAR(50) NOT NULL,
+   enabled  BOOLEAN DEFAULT false,
+   accountNonExpired BOOLEAN DEFAULT false,
+   accountNonLocked BOOLEAN DEFAULT false,
+   credentialsNonExpired BOOLEAN DEFAULT false,
+   PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE address(
+   id INT NOT NULL AUTO_INCREMENT,
+   name VARCHAR(50) NOT NULL,
+   num INT NOT NULL,
+   town VARCHAR(50) NOT NULL,
+   zipcode INT NOT NULL,
+   PRIMARY KEY(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE user_role(
+   id_CustomeUSer INT NOT NULL,
+   id_role INT NOT NULL,
+   PRIMARY KEY(id_CustomeUSer,id_role),
+   FOREIGN KEY(id_CustomeUSer) REFERENCES CustomeUSer(id),
+   FOREIGN KEY(id_role) REFERENCES role(id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+
+
