@@ -1,6 +1,6 @@
 package fr.formation.Gardens.dtos;
 
-public interface GardeningViewDto {
+public interface GardenerViewDto {
 	long getid();
 	String getName();
 

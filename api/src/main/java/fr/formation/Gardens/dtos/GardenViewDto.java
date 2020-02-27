@@ -1,6 +1,7 @@
 package fr.formation.Gardens.dtos;
 
 public interface GardenViewDto {
+
 	Long getId();
 
 	String getName();
@@ -10,6 +11,8 @@ public interface GardenViewDto {
 	String getLocalisation();
 
 	String getTypeOfGarden();
+
+	UserViewDto getUser();
 
 	AddressViewDto getAddress();
 

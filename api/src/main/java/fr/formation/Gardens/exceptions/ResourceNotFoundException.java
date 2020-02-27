@@ -1,4 +1,4 @@
-package fr.formation.Gardens.configuration;
+package fr.formation.Gardens.exceptions;
 
 @SuppressWarnings("serial")
 public class ResourceNotFoundException extends RuntimeException {

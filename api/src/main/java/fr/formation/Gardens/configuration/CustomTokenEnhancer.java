@@ -10,25 +10,20 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 
 import fr.formation.Gardens.entities.CustomUserDetails;
 
-public class CustomTokenEnhancer implements TokenEnhancer{
+public class CustomTokenEnhancer implements TokenEnhancer {
 	final static String USER_ID_KEY = "userId";
 
-    @Override
-    public OAuth2AccessToken enhance(OAuth2AccessToken accessToken,
-	    OAuth2Authentication authentication) {
-	
-	Map<String, Object> additionalInfo = new HashMap<>();
-	
-	CustomUserDetails user = (CustomUserDetails) authentication
-		.getPrincipal();
-	additionalInfo.put(USER_ID_KEY, user.getId());
-	additionalInfo.put("role", user.getAuthorities());
-	((DefaultOAuth2AccessToken) accessToken)
-		.setAdditionalInformation(additionalInfo);
-	return accessToken;
-    }
+	@Override
+	public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
 
-	
-	
+		Map<String, Object> additionalInfo = new HashMap<>();
+
+		CustomUserDetails user = (CustomUserDetails) authentication.getPrincipal();
+		additionalInfo.put(USER_ID_KEY, user.getId());
+		additionalInfo.put("role", user.getAuthorities());
+		additionalInfo.put("username", user.getUsername());
+		((DefaultOAuth2AccessToken) accessToken).setAdditionalInformation(additionalInfo);
+		return accessToken;
+	}
 
 }

@@ -26,44 +26,79 @@ import fr.formation.Gardens.services.UserService;
 public class UserController {
 	private final UserService service;
 
-
 	protected UserController(UserService service) {
-		this.service = service; 
-		
+		this.service = service;
+
 	}
 
-	/** <p> Returns a pageable containing all users present in database. </p>
-     * @return [ ... UserInfoViewDto ] */
+	/**
+	 * <p>
+	 * Returns a pageable containing all users present in database.
+	 * </p>
+	 * 
+	 * @return [ ... UserInfoViewDto ]
+	 */
 	@GetMapping("secure/users")
-	public Set<UserInfoViewDto> getAll() { return service.getAll(); }
+	public Set<UserInfoViewDto> getAll() {
+		return service.getAll();
+	}
 
-	/** <p> Returns user matching  the given id. </p>
+	/**
+	 * <p>
+	 * Returns user matching the given id.
+	 * </p>
+	 * 
 	 * @param
-     * @return UserInfoViewDto */
+	 * @return UserInfoViewDto
+	 */
 	@GetMapping("secure/users/{id}")
-	public UserInfoViewDto get(@PathVariable("id") Long id) { return service.getCurrentUserInfo(id); }
+	public UserInfoViewDto get(@PathVariable("id") Long id) {
+		return service.getCurrentUserInfo(id);
+	}
 
-	/** <p> Persists new user with the given {@code RequestBody} </p>
-     * @param
-     * @return UserInfoViewDto */
+	/**
+	 * <p>
+	 * Persists new user with the given {@code RequestBody}
+	 * </p>
+	 * 
+	 * @param
+	 * @return UserInfoViewDto
+	 */
 	@PostMapping("auth/signup")
-	public UserInfoViewDto create(@Valid @RequestBody UserInfoCreateDto dto) { return service.create(dto); }
+	public UserInfoViewDto create(@Valid @RequestBody UserInfoCreateDto dto) {
+		return service.create(dto);
+	}
 
-	/** <p> Update user matching  the given id  with new  informations passed in {@code RequestBody}  </p>
+	/**
+	 * <p>
+	 * Update user matching the given id with new informations passed in
+	 * {@code RequestBody}
+	 * </p>
+	 * 
 	 * @param
-     * @return UserInfoViewDto */
+	 * @return UserInfoViewDto
+	 */
 	@PutMapping("secure/users/{id}")
-	public UserInfoViewDto  update(@PathVariable("id") Long id,  @Valid @RequestBody UserInfoUpdateDto dto) { return service.update(id, dto); }
+	public UserInfoViewDto update(@PathVariable("id") Long id, @Valid @RequestBody UserInfoUpdateDto dto) {
+		return service.update(id, dto);
+	}
 
-	/** <p> Delete user matching  the given id. </p>
+	/**
+	 * <p>
+	 * Delete user matching the given id.
+	 * </p>
+	 * 
 	 * @param
-     * @return void */
+	 * @return void
+	 */
 	@DeleteMapping("secure/users/{id}")
-	public void delete(@PathVariable("id") Long id) { service.delete(id); }
+	public void delete(@PathVariable("id") Long id) {
+		service.delete(id);
+	}
 
-    @GetMapping("/secure/userInfo")
-    public UserInfoViewDto userInfo() {
-        Long userId = SecurityHelper.getUserId();
-        return service.getCurrentUserInfo(userId);
-    }
+	@GetMapping("/secure/users/me")
+	public UserInfoViewDto userInfo() {
+		Long userId = SecurityHelper.getUserId();
+		return service.getCurrentUserInfo(userId);
+	}
 }

@@ -32,19 +32,23 @@ public class Garden {
 	private String typeOfGarden;
 
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Address address;
 
 	@JsonIgnore
-	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private Profil profil;
+
+	@JsonIgnore
+	@OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	private CustomUser user;
 
 	public Garden() {
 
 	}
 
 	public Garden(Long id, String name, double size, String localisation, String typeOfGarden, Address address,
-			Profil profil) {
+			Profil profil, CustomUser user) {
 
 		this.id = id;
 		this.name = name;
@@ -53,6 +57,7 @@ public class Garden {
 		this.typeOfGarden = typeOfGarden;
 		this.address = address;
 		this.profil = profil;
+		this.user = user;
 
 	}
 
@@ -112,10 +117,19 @@ public class Garden {
 		this.profil = profil;
 	}
 
+	public CustomUser getUser() {
+		return user;
+	}
+
+	public void setUser(CustomUser user) {
+		this.user = user;
+	}
+
 	@Override
 	public String toString() {
 		return "Garden [id=" + id + ", name=" + name + ", size=" + size + ", localisation=" + localisation
-				+ ", typeOfGarden=" + typeOfGarden + ", address=" + address + "]";
+				+ ", typeOfGarden=" + typeOfGarden + ", address=" + address + ", profil=" + profil + ", user=" + user
+				+ "]";
 	}
 
 }

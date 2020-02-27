@@ -4,18 +4,17 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import fr.formation.Gardens.dtos.GardeningViewDto;
-import fr.formation.Gardens.entities.Gardening;
+import fr.formation.Gardens.dtos.GardenerViewDto;
+import fr.formation.Gardens.entities.Gardener;
 
-public interface GardeningService {
-	
-	GardeningViewDto getById(Long id);
+public interface GardenerService {
 
-	List<Gardening> getAllGardenings();
+	GardenerViewDto getById(Long id);
 
-	Gardening save(@Valid Gardening gardening);
+	List<Gardener> getAllGardeners();
+
+	Gardener save(@Valid Gardener gardening);
 
 	void deleteByid(Long id);
 
 }
-

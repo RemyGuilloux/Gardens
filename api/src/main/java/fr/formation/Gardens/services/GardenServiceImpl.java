@@ -11,8 +11,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 
 import fr.formation.Gardens.dtos.GardenViewDto;
+import fr.formation.Gardens.dtos.UpdateGardenDto;
 import fr.formation.Gardens.entities.Garden;
-import fr.formation.Gardens.exceptions.ResourceNotFound;
+import fr.formation.Gardens.exceptions.ResourceNotFoundException;
 import fr.formation.Gardens.repositories.AddressJpaRepository;
 import fr.formation.Gardens.repositories.GardenJpaRepository;
 import fr.formation.Gardens.repositories.ProfilJpaRepository;
@@ -37,7 +38,6 @@ public class GardenServiceImpl implements GardenService {
 
 	@Override
 	public GardenViewDto getById(Long id) {
-
 		return repository.getById(id);
 	}
 
@@ -49,22 +49,25 @@ public class GardenServiceImpl implements GardenService {
 
 	@Override
 	public List<GardenViewDto> getAllGardens() {
-
 		return repository.findAllProjectedBy();
 	}
 
 	@Override
 	public void deleteById(Long id) {
-		repository.deleteById(id);
+
+		Optional<Garden> gardenDelete = repository.findById(id);
+		Garden toBeDeleted = gardenDelete.orElseThrow(() -> new ResourceNotFoundException());
+		repository.delete(toBeDeleted);
 
 	}
 
 	@SuppressWarnings("unused")
 	@Override
-	public Garden update(@PathVariable(value = "id") Long id, @Valid @RequestBody Garden garden) {
+	public Garden update(@PathVariable(value = "id") Long id, @Valid @RequestBody UpdateGardenDto garden) {
 		Optional<Garden> gardenUpdate = repository.findById(id);
 		gardenUpdate.ifPresent(elt -> mapper.map(garden, elt));
-		Garden savedGarden = gardenUpdate.orElseThrow(() -> new ResourceNotFound("Garden not found with id " + id));
+		Garden savedGarden = gardenUpdate
+				.orElseThrow(() -> new ResourceNotFoundException("Garden not found with id " + id));
 		return repository.save(savedGarden);
 
 	}

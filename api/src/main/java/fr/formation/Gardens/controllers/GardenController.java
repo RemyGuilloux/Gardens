@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import fr.formation.Gardens.dtos.GardenViewDto;
+import fr.formation.Gardens.dtos.UpdateGardenDto;
 import fr.formation.Gardens.entities.Garden;
+import fr.formation.Gardens.exceptions.ResourceNotFoundException;
 import fr.formation.Gardens.services.GardenService;
 
 @RestController
@@ -23,32 +25,35 @@ import fr.formation.Gardens.services.GardenService;
 @RequestMapping()
 public class GardenController {
 	private final GardenService service;
-	
-	
+
 	public GardenController(GardenService service) {
 		this.service = service;
-	    }
-	
+	}
+
 	@GetMapping("/gardens/{id}")
-    public GardenViewDto getById(@PathVariable Long id) {
-	 return service.getById(id);
-	
-    }
+	public GardenViewDto getById(@PathVariable Long id) {
+		return service.getById(id);
+
+	}
+
 	@GetMapping("/gardens")
-	public List<GardenViewDto> getAllGardens(){
+	public List<GardenViewDto> getAllGardens() throws ResourceNotFoundException {
 		return service.getAllGardens();
 	}
-	
+
 	@PostMapping("/gardens")
 	public Garden createGarden(@Valid @RequestBody Garden garden) {
 		return service.save(garden);
 	}
+
 	@DeleteMapping("gardens/{id}")
-	public void deleteMatch(@PathVariable Long id) {
+	public void delete(@PathVariable Long id) throws ResourceNotFoundException {
 		service.deleteById(id);
 	}
-	@PutMapping ("/gardens/{id}")
-	public Garden updateGarden(@PathVariable Long id,@Valid @RequestBody Garden garden) {
+
+	@PutMapping("/gardens/{id}")
+	public Garden updateGarden(@PathVariable Long id, @Valid @RequestBody UpdateGardenDto garden)
+			throws ResourceNotFoundException {
 		return service.update(id, garden);
 	}
 }
