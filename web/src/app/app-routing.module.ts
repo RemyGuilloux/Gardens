@@ -1,19 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { CreateProfilComponent } from './create-profil/create-profil.component';
-import { ProfilListComponent } from './profil-list/profil-list.component';
-import { HomepageComponent } from './homepage/homepage.component';
-import { GardenListComponent } from './garden-list/garden-list.component';
-import { ProfilComponent } from './profil/profil.component';
-import { GardeningListComponent} from './gardening-list/gardening-list.component';
-import { CreateProfilGardeningComponent } from './create-profil-gardening/create-profil-gardening.component';
-import { MessageComponent } from'./message/message.component';
-import { GardenComponent } from './garden/garden.component';
-import { WelcomeComponent } from './welcome/welcome/welcome.component';
-import { AddressComponent } from './address/address.component';
+import { CreateProfilComponent } from './components/form/create-profil/create-profil.component';
+import { ProfilListComponent } from './components/lists/profil-list/profil-list.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
+import { GardenListComponent } from './components/lists/garden-list/garden-list.component';
+import { ProfilComponent } from './components/profil/profil.component';
+import { GardenerListComponent} from './components/lists/gardener-list/gardener-list.component';
+import { CreateProfilGardenerComponent } from './components/form/create-profil-gardener/create-profil-gardener.component';
+
+import { GardenComponent } from './components/garden/garden.component';
+import { WelcomeComponent } from './components/welcome/welcome.component';
+import { AddressComponent } from './components/address/address.component';
 import { AuthGuard } from './services/oauth/guards/auth.gard';
 import { UserGuard } from './services/oauth/guards/user.gard';
-import { UpdateGardenComponent } from './update-garden/update-garden.component';
+import { UpdateGardenComponent } from './components/form/update-garden/update-garden.component';
+import { AboutUsComponent} from './components/about-us/about-us.component';
+
+
 
 const routes: Routes = [
   {path: '', redirectTo: '/welcome', pathMatch: 'full'},
@@ -21,14 +24,15 @@ const routes: Routes = [
   {path: 'gardens', component: GardenListComponent},
   {path: 'welcome', component: WelcomeComponent},
   {path: 'profils', component: ProfilListComponent},
-  {path: 'gardening', component: GardeningListComponent},
+  {path: 'gardening', component: GardenerListComponent},
   {path: 'add', component: CreateProfilComponent},
-  {path: 'add gardening', component: CreateProfilGardeningComponent},
+  {path: 'add-gardening', component: CreateProfilGardenerComponent},
   {path: 'homepage', component: HomepageComponent},
   {path: 'garden', component: GardenComponent},
   {path: 'address', component: AddressComponent},
   {path: 'profil', component: ProfilComponent},
-  {path: 'message', component: MessageComponent},
+  {path: 'aboutUs', component: AboutUsComponent},
+
   {
     path: 'homepage',
     component: HomepageComponent,

@@ -2,12 +2,12 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Observable, BehaviorSubject } from 'rxjs';
-import { config } from '../../config';
+import { config } from '../../ressources/config';
 import { Token } from './token/token';
 import { MatSnackBar } from '@angular/material';
 
 import { Cookie } from 'ng2-cookies';
-import { AuthLogin } from '../../models/users/forms/login.model';
+import { AuthLogin } from '../../models/login.model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,6 +17,7 @@ export class AuthService {
 
   private readonly registerURI = config.apiURI + 'api/auth/signup';
   private readonly loginURI = config.apiURI + 'oauth/token';
+  private readonly currentUserURI = config.apiURI + 'api/secure/users/me';
   public loggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>( Cookie.check('access_token') );
 
   constructor(protected router: Router, private http: HttpClient, private snackBar: MatSnackBar) {}
@@ -26,12 +27,12 @@ export class AuthService {
       token => {
         this.saveToken( this.mapToken(token) );
         this.router.navigate(['/homepage']);
-        this.snackBar.open('Welcome Back ' + data.username, '', { duration: 3000 } );
+        this.snackBar.open('Bienvenue ' + data.username, '', { duration: 3000 } );
       }, error => {
         const err = error.error.error;
         if (!!err) {
           if (err === 'unauthorized' || err === 'invalid_grant' ) {
-            this.snackBar.open('les mots de passes ne sont pas les mêmes ...  ', '', { duration: 3000 } );
+            this.snackBar.open('mot de passe ou usernmae incorect ...  ', '', { duration: 3000 } );
           }
       } else {
         this.snackBar.open('problème de serveur ', '', { duration: 3000 } );
@@ -42,12 +43,19 @@ export class AuthService {
 
   signUp = (info: any): Observable<string> => this.http.post<string>(this.registerURI, info, config.httpOptions.json);
 
-  saveToken = (token: Token): void => Cookie.set('access_token', token.accessToken, token.expiresIn);
+  saveToken = (token: Token): void => Cookie.set('access_token', JSON.stringify(token), token.expiresIn);
 
   logout = (): void => {Cookie.delete('access_token'); 
   this.router.navigate(['/welcome']); };
 
-  getJwtToken = (): string => Cookie.get('access_token');
+  private getToken = (): Token => JSON.parse(Cookie.get('access_token'));
+
+  getCurrentUser = (): any => {
+    const token: Token = this.getToken();
+    return {id: token.userId, username: token.username };
+  }
+
+  getJwtToken = (): string => this.getToken().accessToken;
 
   isLoggedIn = (): boolean => {
     return Cookie.check('access_token')
@@ -60,6 +68,6 @@ export class AuthService {
     data.username + '&password=' + data.password + '&client_id=' + config.clientId
 
   private mapToken = (token: any): Token => new Token(token.access_token, token.token_type,
-    token.refresh_token, token.expires_in, token.scope, token.role, token.userId )
+    token.refresh_token, token.expires_in, token.scope, token.role, token.userId, token.username )
 
 }

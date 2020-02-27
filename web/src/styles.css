@@ -1,3 +1,26 @@
 /* You can add global styles to this file, and also import other style files */
 
 
+
+
+
+:root {
+    --primary: #12e3a2;
+    --secondary: #29b941;
+    --thirdery:#a7cf45
+    
+}
+
+.btn.btn-info {
+    background-color: var(--primary);
+}
+
+.btn.btn-danger {
+    background-color: var(--secondary);
+    border-color: var(--secondary);
+}
+
+.btn.btn-success {
+    background-color:var(--thirdery);
+}
+

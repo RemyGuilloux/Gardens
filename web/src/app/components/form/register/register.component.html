@@ -1,0 +1,78 @@
+<form id="register-form"
+    class="spaced"
+    [formGroup]="registerForm"
+    novalidate
+    (ngSubmit)="register(registerForm.value)">
+    <mat-form-field>
+        <mat-label>
+            <span [hidden]='username.valid'>Quel est votre Nom ?</span>
+            <span [hidden]='username.invalid'>Pseudo</span>
+        </mat-label>
+        <input formControlName="username"
+            matInput
+            maxlength="12"
+            required >
+        <mat-icon color="primary" *ngIf='username.valid && (username.dirty || username.touched) '></mat-icon>
+        <mat-icon color="warn" *ngIf='username.invalid && (username.dirty || username.touched) '></mat-icon>
+        <mat-error *ngFor="let validation of errorMessages.name">
+            <mat-error *ngIf="username.hasError(validation.type) && (username.dirty || username.touched)">{{validation.message}}</mat-error>
+        </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>
+            <span [hidden]='email.valid'>Quel est votre email ?</span>
+            <span [hidden]='email.invalid'>Mail</span>
+        </mat-label>
+        <input formControlName="email"
+        matInput
+        placeholder="nom@email.com"
+        email 
+        required >
+        <mat-icon color="primary" *ngIf='email.valid && email.touched' ></mat-icon>
+        <mat-icon color="warn" *ngIf='email.invalid && email.touched'  ></mat-icon>
+          <mat-error *ngFor="let validation of errorMessages.mail">
+            <mat-error *ngIf="email.hasError(validation.type) && (email.dirty || email.touched)">{{validation.message}}</mat-error>
+        </mat-error>
+    </mat-form-field>
+    <section formGroupName="passwordForm"
+        >
+
+        <mat-form-field>
+            <mat-label>Choisir un mot de passe</mat-label>
+                <input formControlName="password"
+                    type="password"
+                    matInput 
+                    placeholder=" Quel est votre mot de passe" 
+                    required>
+                <mat-icon color="primary" *ngIf='password.valid && password.touched' ></mat-icon>
+                <mat-icon color="warn" *ngIf='password.invalid && password.touched' ></mat-icon>
+                <mat-error *ngFor="let validation of errorMessages.password">
+                    <mat-error *ngIf="password.hasError(validation.type) && (password.dirty || password.touched)">{{validation.message}}</mat-error>
+                </mat-error>
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Confirmer votre mot de passe</mat-label>
+                <input formControlName="confirm"
+                type="password"
+                matInput
+                placeholder="confirmez votre mot de passe"
+                [errorStateMatcher]="parentErrorStateMatcher"
+                required >
+                <mat-icon color="primary" *ngIf=" passwordForm.valid && confirm.touched" ></mat-icon>
+                <mat-icon color="warn" *ngIf="passwordForm.invalid && confirm.touched " ></mat-icon>
+                <mat-error *ngFor="let validation of errorMessages.confirm">
+                    <mat-error *ngIf="passwordForm.invalid && confirm.touched ">{{validation.message}}</mat-error>
+                </mat-error>
+        </mat-form-field>
+
+    </section>
+    <mat-slide-toggle class="is-flex space-evenly"formControlName="agree" color="accent"required >
+        Etes vous d'accord <span class='is-accent'>avec les termes du contrat</span>
+    </mat-slide-toggle>
+    <footer fxLayout="row" fxLayoutAlign="space-evenly center">
+        <button type="submit" mat-raised-button [disabled]="registerForm.invalid" color="primary" >S'inscrire</button>
+    </footer>
+
+</form>

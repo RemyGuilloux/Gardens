@@ -1,0 +1,29 @@
+<form id="login-form"
+    class="spaced"
+    [formGroup]="loginForm"
+    (submit)="login()" >
+    <br>
+    <br>
+    <mat-form-field appearance="legacy" color="primary">
+        <mat-label> Quel est votre Nom ?</mat-label>
+        <input matInput placeholder="nom" formControlName="username">
+        
+        <mat-error *ngFor="let validation of errorMessages.username">
+            <mat-error *ngIf="username.hasError(validation.type) && (username.dirty || username.touched)">{{validation.message}}</mat-error>
+        </mat-error> 
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label> Quel est votre mot de passe ? </mat-label>
+            <input type="password" matInput placeholder=" mot de passe" formControlName="password">
+           
+            <mat-error *ngFor="let validation of errorMessages.password">
+                <mat-error *ngIf="password.hasError(validation.type) && (password.dirty || password.touched)">{{validation.message}}</mat-error>
+            </mat-error>
+    </mat-form-field>
+    <br>
+    <footer fxLayout="row" fxLayoutAlign="space-evenly center">
+        <button type="submit" mat-raised-button [disabled]="loginForm.invalid" class="toti "> Login </button>
+    </footer>
+
+</form>

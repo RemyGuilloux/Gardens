@@ -6,6 +6,7 @@ export class Token {
     scope: string;
     role: [ { authority: string } ];
     userId: number;
+    username: string;
 
     constructor(accessToken: string,
                 tokentType: string,
@@ -13,7 +14,8 @@ export class Token {
                 expiresIn: number,
                 scope: string,
                 role: [ { authority: string } ],
-                userId: number) {
+                userId: number,
+                username: string) {
             this.accessToken = accessToken;
             this.tokentType = tokentType;
             this.refreshToken = refreshToken;
@@ -21,6 +23,7 @@ export class Token {
             this.scope = scope;
             this.role = role;
             this.userId = userId;
+            this.username = username;
     }
 
 }
